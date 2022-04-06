@@ -74,11 +74,6 @@ WSGI_APPLICATION = 'heroes_villains_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 
-REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False
-}
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
