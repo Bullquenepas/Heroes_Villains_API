@@ -5,7 +5,6 @@ from .models import Super
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 
-# Create your views here.
 @api_view(['GET','POST'])
 def supers_list(request):
     if request.method == 'GET':
@@ -13,10 +12,10 @@ def supers_list(request):
         serializer = SuperSerializer(super,many=True)
         return Response(serializer.data, status.HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = SuperSerializer(data = request.data)
+        serializer = SuperSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data, status.HTTP_201_CREATED)
+        return Response(serializer.data, status.HTTP_201_CREATED)
 
 @api_view(['GET','PUT','DELETE'])
 def super_detail(request, pk):
@@ -24,11 +23,11 @@ def super_detail(request, pk):
     if request.method == 'GET':
         serializer = SuperSerializer(super)
         return Response(serializer.data, status.HTTP_200_OK)
-    if request.method == 'PUT':
-        serializer = SuperSerializer(super,data = request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        serializer = SuperSerializer(super, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)
     if request.method == 'DELETE':
         super.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
